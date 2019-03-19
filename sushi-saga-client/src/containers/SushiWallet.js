@@ -8,7 +8,7 @@ const SushiWallet = (props) => {
     <Fragment>
       <h2>Sushi Wallet</h2>
       <form onSubmit={props.addMoney}>
-        <label for="money">Add money to wallet</label>
+        <label>Add money to wallet</label>
         <input type="number" id="money" name="money" onChange={props.recordMoney}></input>
         <input type="submit"></input>
       </form>
