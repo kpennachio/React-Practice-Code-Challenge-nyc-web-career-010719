@@ -10,7 +10,7 @@ const SushiContainer = (props) => {
       if (props.eatenSushi.includes(sushi)) {
         eaten = true
       }
-      return <Sushi sushi={sushi} eatSushi={props.eatSushi} eaten={eaten}/>
+      return <Sushi sushi={sushi} eatSushi={props.eatSushi} eaten={eaten} key={sushi.id}/>
     })
     return allSushi.slice(props.sliceBegin, props.sliceEnd)
   }

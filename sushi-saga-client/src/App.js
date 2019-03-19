@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SushiContainer from './containers/SushiContainer';
 import Table from './containers/Table';
+import SushiWallet from './containers/SushiWallet'
 
 // Endpoint!
 const API = "http://localhost:3000/sushis"
@@ -12,7 +13,8 @@ class App extends Component {
     sliceBegin: 0,
     sliceEnd: 4,
     eatenSushi: [],
-    money: 100
+    money: 100,
+    formInput: 0
   }
 
   componentDidMount() {
@@ -24,8 +26,6 @@ class App extends Component {
   }
 
   changeSlice = (e) => {
-    // e.preventDefault()
-    console.log("reached change slice")
     this.setState((prevState) => ({
       sliceBegin: prevState.sliceBegin + 4,
       sliceEnd: prevState.sliceEnd + 4
@@ -51,11 +51,26 @@ class App extends Component {
       }))
   }
 
+  recordMoney = (e) => {
+    this.setState({formInput: e.target.value})
+  }
+
+  addMoney = (e) => {
+    e.preventDefault()
+    let money = parseInt(this.state.formInput)
+    this.setState((prevState) => ({
+      money: parseInt(prevState.money) + money
+    }))
+    e.target.reset()
+  }
+
+
   render() {
     return (
       <div className="app">
         <SushiContainer sushis={this.state.sushis} sliceBegin={this.state.sliceBegin} sliceEnd={this.state.sliceEnd} changeSlice={this.changeSlice} eatenSushi={this.state.eatenSushi} eatSushi={this.eatSushi}/>
         <Table money={this.state.money} eatenSushi={this.state.eatenSushi}/>
+        <SushiWallet addMoney={this.addMoney} recordMoney={this.recordMoney}/>
       </div>
     );
   }
