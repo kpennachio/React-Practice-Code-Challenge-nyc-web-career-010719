@@ -26,10 +26,19 @@ class App extends Component {
   }
 
   changeSlice = (e) => {
-    this.setState((prevState) => ({
-      sliceBegin: prevState.sliceBegin + 4,
-      sliceEnd: prevState.sliceEnd + 4
-    }))
+    // if sushi conveyor belt has not reached the end, keep rotating
+    if (this.state.sliceEnd < 100) {
+      this.setState((prevState) => ({
+        sliceBegin: prevState.sliceBegin + 4,
+        sliceEnd: prevState.sliceEnd + 4
+      }))
+    }
+    else {
+      this.setState({
+        sliceBegin: 0,
+        sliceEnd: 4
+      })
+    }
   }
 
   eatSushi = (e, sushi) => {
